@@ -52,6 +52,7 @@
             const bar = document.createElement('div');
             bar.classList.add('bar');
             bar.style.height = `${value}%`;
+            bar.setAttribute('title', `${key}: ${value}%`);
             chart.appendChild(bar);
           }
         });
