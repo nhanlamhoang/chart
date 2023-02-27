@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Data Visualization Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style>
+		canvas{
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+<body>
+	<div style="width: 50%;">
+		<canvas id="bar-chart"></canvas>
+	</div>
+	<div style="width: 50%;">
+		<canvas id="line-chart"></canvas>
+	</div>
+
+	<script>
+		const janData = [100, 88, 90, 40, 100, 100, 97];
+		const febData = [50, 100, 113, 110, 50, null, 150];
+		const marData = [100, 99, 101, 135, 50, 40, 116];
+		const aprData = [100, 81, 96, 70, 0, 140, 96];
+
+		const labels = ['TCL', 'TRAVELOKA', 'SHOPEE HCM', 'SHOPEE LĐ', 'P&G', 'GARENA', 'ABBOTT'];
+
+		// Bar chart
+		const ctx = document.getElementById('bar-chart').getContext('2d');
+		const barChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: 'Jan',
+					data: janData,
+					backgroundColor: 'rgba(54, 162, 235, 0.5)',
+					borderColor: 'rgba(54, 162, 235, 1)',
+					borderWidth: 1
+				},{
+					label: 'Feb',
+					data: febData,
+					backgroundColor: 'rgba(255, 206, 86, 0.5)',
+					borderColor: 'rgba(255, 206, 86, 1)',
+					borderWidth: 1
+				},{
+					label: 'Mar',
+					data: marData,
+					backgroundColor: 'rgba(75, 192, 192, 0.5)',
+					borderColor: 'rgba(75, 192, 192, 1)',
+					borderWidth: 1
+				},{
+					label: 'Apr',
+					data: aprData,
+					backgroundColor: 'rgba(255, 99, 132, 0.5)',
+					borderColor: 'rgba(255, 99, 132, 1)',
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+
+		// Line chart
+		const ctx2 = document.getElementById('line-chart').getContext('2d');
+		const lineChart = new Chart(ctx2, {
+			type: 'line',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: 'Jan',
+					data: janData,
+					fill: false,
+					borderColor: 'rgba(54, 162, 235, 1)',
+					lineTension: 0.2
+				},{
+					label: 'Feb',
+					data: feb
