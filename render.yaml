@@ -1,10 +1,9 @@
-build:
-  pythonVersion: 3.10.12
-
 services:
   - type: web
     name: chart-app
     env: python
+    build:
+      pythonVersion: 3.10.12
     buildCommand: |
       apt-get update
       apt-get install -y curl gnupg2
