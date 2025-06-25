@@ -4,3 +4,4 @@ unidecode
 plotly
 dash
 numpy
+pyodbc==5.1.0
