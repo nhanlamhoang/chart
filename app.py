@@ -18,16 +18,12 @@ database = 'BIOSecurity'
 username = 'hr'
 password = 'nN@12345678910'
 params = urllib.parse.quote_plus(
-    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={username};"
-    f"PWD={password}"
+    "DRIVER={ODBC Driver 17 for SQL Server};"
+    "SERVER=server_name;DATABASE=db_name;"
+    "UID=username;PWD=password"
 )
-engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
+engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
-
-# In[3]:
 
 
 # PA01 Headcount
@@ -43,8 +39,6 @@ def clean_emp_id(x):
 df_excel['Employee ID'] = df_excel['Employee ID'].apply(clean_emp_id)
 df_excel = df_excel[df_excel['Employee ID'] != '']
 
-
-# In[4]:
 
 
 #PA01 DIM Master
@@ -65,8 +59,6 @@ df_dim_table_master = df_dim_table_master.loc[:, ~df_dim_table_master.columns.du
 # (Tùy chọn) Đổi lại định dạng đẹp để hiển thị
 df_dim_table_master.columns = [col.title().replace('_', ' ') for col in df_dim_table_master.columns]
 
-
-# In[5]:
 
 
 # DB Attendance
@@ -89,8 +81,6 @@ latest_attendance_info = df1.sort_values('att_date', ascending=False).groupby('p
 # Giữ lại các cột cần thiết
 latest_attendance_info = latest_attendance_info[['pers_person_pin', 'att_date', 'auth_area_name']]
 
-
-# In[9]:
 
 
 #Active headcount with attendance check
@@ -141,9 +131,6 @@ df_merged_filtered_2['auth_area_name'] = np.where(
 )
 
 df_merged_filtered_2
-
-
-# In[ ]:
 
 
 df = df_merged_filtered.copy()
