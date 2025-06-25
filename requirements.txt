@@ -1,0 +1,6 @@
+pandas
+sqlalchemy
+unidecode
+plotly
+dash
+numpy
