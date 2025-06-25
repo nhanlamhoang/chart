@@ -1,3 +1,6 @@
+build:
+  pythonVersion: 3.10.12
+
 services:
   - type: web
     name: chart-app
