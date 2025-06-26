@@ -1,8 +1,4 @@
-pandas
-sqlalchemy
-unidecode
-plotly
-dash
-numpy
-pyodbc==5.1.0
-openpyxl
+dash==2.7.0
+pandas==1.4.3
+gunicorn
+dash-tools
