@@ -46,7 +46,7 @@ df_excel = df_excel[df_excel['Employee ID'] != '']
 
 #PA01 DIM Master
 
-file_excel = r'D:\1. TCV\1. Data Source\1.Headcount Data\PA01_Headcount Master Data.xlsx'
+file_excel = 'headcount_master.xlsx'  # đúng tên file bạn vừa upload
 df_dim_table_master = pd.read_excel(file_excel, sheet_name='Dim Table Master', engine='openpyxl')
 
 # Bỏ dòng rỗng ở 'Project Code'
