@@ -324,5 +324,4 @@ app.layout = html.Div([
     )
 ])
 
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=10000)
+server = app.server  # để gunicorn có thể chạy được
