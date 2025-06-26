@@ -1,33 +1,24 @@
 # Import library
 import pandas as pd
-from sqlalchemy import create_engine
-import urllib
-from unidecode import unidecode
-from datetime import datetime, timedelta
+import plotly.graph_objects as go
+import numpy as np
 import pandas as pd
 import plotly.express as px
 import dash
+from unidecode import unidecode
+from datetime import datetime, timedelta
 from dash import html, dcc, dash_table, Input, Output
-dash.dash_table.DataTable
-import plotly.graph_objects as go
-import numpy as np
+import pymssql
+import pandas as pd
+import os
 
+server = os.environ.get('10.12.24.26')
+database = os.environ.get('BIOSecurity')
+username = os.environ.get('hr')
+password = os.environ.get('nN@12345678910')
 
-server = '10.12.24.26'
-database = 'BIOSecurity'
-username = 'hr'
-password = 'nN@12345678910'
-params = urllib.parse.quote_plus(
-    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={username};"
-    f"PWD={password}"
-)
-engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
-
-
-
+# Kết nối pymssql
+conn = pymssql.connect(server, username, password, database)
 
 # PA01 Headcount
 file_excel = 'headcount_master.xlsx'  # đúng tên file bạn vừa upload
@@ -71,7 +62,8 @@ FROM [BIOSecurity].[dbo].[att_transaction]
 '''
 
 # Đọc dữ liệu từ SQL Server
-df1 = pd.read_sql(query, engine)
+df1 = pd.read_sql(query, conn)
+conn.close()
 
 # Lọc null
 df1['pers_person_pin'] = df1['pers_person_pin'].astype(str).str.strip()
