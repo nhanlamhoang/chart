@@ -1,8 +1,6 @@
 dash
 pandas
 openpyxl
-sqlalchemy
-pymssql
 plotly
 numpy
 unidecode
