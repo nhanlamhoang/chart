@@ -8,17 +8,9 @@ import dash
 from unidecode import unidecode
 from datetime import datetime, timedelta
 from dash import html, dcc, dash_table, Input, Output
-import pymssql
 import pandas as pd
 import os
 
-server = os.environ.get('DB_SERVER')
-database = os.environ.get('DB_NAME')
-username = os.environ.get('DB_USER')
-password = os.environ.get('DB_PASS')
-
-# Kết nối pymssql
-conn = pymssql.connect(server, username, password, database)
 
 # PA01 Headcount
 file_excel = 'headcount_master.xlsx'  # đúng tên file bạn vừa upload
@@ -29,14 +21,12 @@ def clean_emp_id(x):
         return str(int(float(x))).strip()
     except:
         return ''
-
 df_excel['Employee ID'] = df_excel['Employee ID'].apply(clean_emp_id)
 df_excel = df_excel[df_excel['Employee ID'] != '']
 
 
 
 #PA01 DIM Master
-
 file_excel = 'headcount_master.xlsx'  # đúng tên file bạn vừa upload
 df_dim_table_master = pd.read_excel(file_excel, sheet_name='Dim Table Master', engine='openpyxl')
 
@@ -54,20 +44,15 @@ df_dim_table_master = df_dim_table_master.loc[:, ~df_dim_table_master.columns.du
 df_dim_table_master.columns = [col.title().replace('_', ' ') for col in df_dim_table_master.columns]
 
 
-# DB Attendance
-query = f'''
-SELECT 
-    id, pers_person_pin, update_time, auth_area_name, att_date, att_datetime, att_time, auth_dept_name, device_id, device_name
-FROM [BIOSecurity].[dbo].[att_transaction]
-'''
-
-# Đọc dữ liệu từ SQL Server
-df1 = pd.read_sql(query, conn)
-conn.close()
+# DB Attendance export tu SQL ra csv
+df1 = 'attendance data.csv'
+df1 = pd.read_csv('attendance data.csv')
 
 # Lọc null
 df1['pers_person_pin'] = df1['pers_person_pin'].astype(str).str.strip()
 df1 = df1[df1['pers_person_pin'] != '']
+
+df1['att_date'] = pd.to_datetime(df1['att_date'], errors='coerce')
 
 # Lấy bản ghi có att_date mới nhất theo pers_person_pin
 latest_attendance_info = df1.sort_values('att_date', ascending=False).groupby('pers_person_pin', as_index=False).first()
