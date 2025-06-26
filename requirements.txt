@@ -1,5 +1,4 @@
-dash==2.9.3
-dash-bootstrap-components==1.4.1
-visdcc==0.0.50
+dash==3.0.4
+dash-bootstrap-components==2.0.3
 dash-tools==1.12.0
 gunicorn
