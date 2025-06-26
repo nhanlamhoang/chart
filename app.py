@@ -30,7 +30,7 @@ engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
 
 
 # PA01 Headcount
-file_excel = r'D:\1. TCV\1. Data Source\1.Headcount Data\PA01_Headcount Master Data.xlsx'
+file_excel = 'headcount_master.xlsx'  # đúng tên file bạn vừa upload
 df_excel = pd.read_excel(file_excel, engine='openpyxl')
 
 def clean_emp_id(x):
