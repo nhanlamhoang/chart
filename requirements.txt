@@ -2,7 +2,7 @@ dash
 pandas
 openpyxl
 sqlalchemy
-pyodbc
+pymssql
 plotly
 numpy
 unidecode
