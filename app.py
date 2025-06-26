@@ -1,10 +1,14 @@
+# app.py
+
 import dash
 from dash import html
-import dash_bootstrap_components as dbc
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+# tạo đối tượng app là callable
+app = dash.Dash(__name__)
 
-app.layout = dbc.Container([
-    html.H1("Hello Dash!", className="text-primary"),
-    html.P("Dash is working with Bootstrap Components!", className="lead")
+app.layout = html.Div([
+    html.H1("Ứng dụng Dash đầu tiên của bạn")
 ])
+
+# KHÔNG gọi app.run() hoặc app.run_server()
+# vì Render sẽ tự làm qua gunicorn
