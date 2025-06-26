@@ -12,10 +12,10 @@ import pymssql
 import pandas as pd
 import os
 
-server = os.environ.get('10.12.24.26')
-database = os.environ.get('BIOSecurity')
-username = os.environ.get('hr')
-password = os.environ.get('nN@12345678910')
+server = os.environ.get('DB_SERVER')
+database = os.environ.get('DB_NAME')
+username = os.environ.get('DB_USER')
+password = os.environ.get('DB_PASS')
 
 # Kết nối pymssql
 conn = pymssql.connect(server, username, password, database)
