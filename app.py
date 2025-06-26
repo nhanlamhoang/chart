@@ -8,6 +8,3 @@ app.layout = dbc.Container([
     html.H1("Hello Dash!", className="text-primary"),
     html.P("Dash is working with Bootstrap Components!", className="lead")
 ])
-
-if __name__ == "__main__":
-    app.run(debug=True)
